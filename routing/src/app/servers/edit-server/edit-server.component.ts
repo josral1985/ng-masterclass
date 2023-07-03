@@ -29,7 +29,7 @@ export class EditServerComponent implements OnInit {
 
     //reactive to change queryParams and fragment
     this.route.params.subscribe();
-    this.route.fragment.subscribe()
+    this.route.fragment.subscribe();
   }
 
   onUpdateServer() {
