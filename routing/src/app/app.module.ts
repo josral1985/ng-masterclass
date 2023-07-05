@@ -31,7 +31,13 @@ import { ServerResolver } from './servers/server/server-resolver.service';
     ErrorPageComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
-  providers: [ServersService, AuthGuard, AuthService, CanDeactivateGuard, ServerResolver],
+  providers: [
+    ServersService,
+    AuthGuard,
+    AuthService,
+    CanDeactivateGuard,
+    ServerResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
