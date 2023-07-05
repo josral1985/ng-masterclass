@@ -22,7 +22,11 @@ const appRoutes: Routes = [
     path: 'servers',
     component: ServersComponent,
     children: [
-      { path: ':id', component: ServerComponent, resolve: {server: ServerResolver} },
+      {
+        path: ':id',
+        component: ServerComponent,
+        resolve: { server: ServerResolver },
+      },
       {
         path: ':id/edit',
         component: EditServerComponent,
