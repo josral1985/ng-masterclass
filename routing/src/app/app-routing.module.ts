@@ -44,7 +44,10 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    RouterModule.forRoot(appRoutes)
+    // RouterModule.forRoot(appRoutes, { useHash: true }) used to control the parsing of the deployment server and angular
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
