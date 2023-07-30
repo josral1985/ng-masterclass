@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, interval } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +17,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     // creating our own observables
 
     //interval is a function of rxjs that returns an observable which we can subscribed to
-    this.firstObsSubscription = interval(1000).subscribe((count) => {
-      console.log(count);
+    // this.firstObsSubscription = interval(1000).subscribe((count) => {
+    //   console.log(count);
+    // });
+
+    //custom observable (using deprecated create function)
+    const customIntervalObs = Observable.create((observer) => {
+      let count = 0;
+      setInterval(() => {
+        observer.next(count);
+        count++;
+      }, 1000);
+    });
+
+    this.firstObsSubscription = customIntervalObs.subscribe((data) => {
+      console.log(data);
     });
 
     //This alone could cause memory leaks. Just because we navigate out of the homeComponent doesn't stop the observable from emitting.
