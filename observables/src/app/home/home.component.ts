@@ -33,17 +33,38 @@ export class HomeComponent implements OnInit, OnDestroy {
     // });
     //
     // Custom Observable (current)
-    const customObs = new Observable((observer) => {
-      let count = 0;
-      setInterval(() => {
-        observer.next(count);
-        count++;
-      }, 1000);
-    });
-    this.firstObsSubscription = customObs.subscribe((data) => {
-      console.log(data);
-    });
-
+    // const customObs = new Observable((observer) => {
+    //   let count = 0;
+    //   setInterval(() => {
+    //     observer.next(count);
+    //     count++;
+    //   }, 1000);
+    // });
+    // this.firstObsSubscription = customObs.subscribe((data) => {
+    //   console.log(data);
+    // });
+    //
+    //Errors
+    // const customObs = new Observable((observer) => {
+    //   let count = 0;
+    //   setInterval(() => {
+    //     observer.next(count);
+    //     if (count > 3) {
+    //       observer.error(new Error('Count is greater than 3!!'));
+    //     }
+    //     count++;
+    //   }, 1000);
+    // });
+    // this.firstObsSubscription = customObs.subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //     alert(error.message);
+    //   }
+    // );
+    //
     //This alone could cause memory leaks. Just because we navigate out of the homeComponent doesn't stop the observable from emitting.
     // We need to unsubscribe. The subscribe() function returns a Subscription. So by creating a Subscription variable and setting it to the Subscription returned
     // by the observable... wwe can use it to unsubscribe on ngOnDestroy; navigate away from component.
