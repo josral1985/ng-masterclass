@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   console.log(data);
     // });
     //
-    // Custom Observable
+    // Custom Observable (current)
     const customObs = new Observable((observer) => {
       let count = 0;
       setInterval(() => {
