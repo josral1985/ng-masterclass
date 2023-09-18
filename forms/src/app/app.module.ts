@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule, // needed to get the Template Driven Approach
   ],
   providers: [],
   bootstrap: [AppComponent]
