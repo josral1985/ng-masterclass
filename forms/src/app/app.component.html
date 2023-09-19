@@ -57,4 +57,15 @@
       </form>
     </div>
   </div>
+  <hr>
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h3>Your Data</h3>
+      <p>UserName: {{user.usernmae}} </p>
+      <p>Email: {{user.email}}</p>
+      <p>Secret Question: Your First {{user.secretQuestion}}</p>
+      <p>Anser: {{user.answer}}</p>
+      <p>Gender: {{user.gender}}</p>
+    </div>
+  </div>
 </div>
