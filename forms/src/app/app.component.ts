@@ -14,7 +14,7 @@ export class AppComponent {
   user = {
     usernmae: '',
     email: '',
-    secretQestion: '',
+    secretQuestion: '',
     answer: '',
     gender: ''
   }
@@ -51,9 +51,11 @@ export class AppComponent {
   onSubmit() {
     this.user.usernmae = this.signupForm.value.userData.username;
     this.user.email = this.signupForm.value.userData.email;
-    this.user.secretQestion = this.signupForm.value.secret;
+    this.user.secretQuestion = this.signupForm.value.secret;
     this.user.answer = this.signupForm.value.questionAnswer;
     this.user.gender = this.signupForm.value.gender;
     this.submitted = true;
+
+    this.signupForm.reset();
   }
 }
