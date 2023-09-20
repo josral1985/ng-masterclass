@@ -14,12 +14,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //this.signUpForm = new FormGroup({});  // create empty form without any controls
+
+    // Before grouping
+    // this.signUpForm = new FormGroup({
+    //   // add controls
+    //   'username': new FormControl(null, Validators.required),  //formState null -> default value, Validator.required referenced (don't call the function)
+    //   'email': new FormControl(null, [Validators.required, Validators.email]),
+    //   'gender': new FormControl('male')
+    // })
+
     this.signUpForm = new FormGroup({
-      // add controls
-      'username': new FormControl(null, Validators.required),  //formState null -> default value, Validator.required referenced (don't call the function)
-      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'userData': new FormGroup({
+        'username': new FormControl(null, Validators.required),
+        'email': new FormControl(null, [Validators.required, Validators.email])
+      }),
       'gender': new FormControl('male')
-    })
+    });
   }
 
   onSubmit() {
