@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
 
   // Property to hold Form
   signUpForm: FormGroup;
+  forbiddenUserNames = ['Chris', 'Anna'];
 
   ngOnInit(): void {
     //this.signUpForm = new FormGroup({});  // create empty form without any controls
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
 
     this.signUpForm = new FormGroup({
       'userData': new FormGroup({
-        'username': new FormControl(null, Validators.required),
+        'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),  // "this" on the function is called by angular so it needs to be bound
         'email': new FormControl(null, [Validators.required, Validators.email])
       }),
       'gender': new FormControl('male'),
@@ -40,6 +41,14 @@ export class AppComponent implements OnInit {
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signUpForm.get('hobbies')).push(control);
+  }
+
+  // A validator is just a function
+  forbiddenNames(control: FormControl): {[s: string]: boolean} { // returning a key value object
+    if (this.forbiddenUserNames.indexOf(control.value) !== -1) {
+      return {'nameIsForbidden': true};
+    }
+    return null;  // should be null (NOT FALSE)
   }
 
   get controls() {
