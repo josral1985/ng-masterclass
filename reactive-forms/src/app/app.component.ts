@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
     //this.signUpForm = new FormGroup({});  // create empty form without any controls
     this.signUpForm = new FormGroup({
       // add controls
-      'username': new FormControl(null),  //formState null -> default value
-      'email': new FormControl(null),
+      'username': new FormControl(null, Validators.required),  //formState null -> default value, Validator.required referenced (don't call the function)
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'gender': new FormControl('male')
     })
   }
