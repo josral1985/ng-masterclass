@@ -40,11 +40,31 @@ export class AppComponent implements OnInit {
     //     console.log(value)
     //   }
     // )
-    this.signUpForm.statusChanges.subscribe(
-      (value) => {
-        console.log(value);
+    // this.signUpForm.statusChanges.subscribe(
+    //   (value) => {
+    //     console.log(value);
+    //   }
+    // )
+
+
+    this.signUpForm.setValue({
+      'userData': {
+        'username': 'Jose',
+        'email': 'jose@markojuda.com'
+      },
+      'gender': 'male',
+      'hobbies': []
+    })
+
+    this.signUpForm.patchValue({
+      'userData': {
+        'username': 'Anna'
       }
-    )
+    })
+    // resetting the form but keeping the radio button by passing an object
+    this.signUpForm.reset({
+      'gender': 'male'
+    })
   }
 
   onSubmit() {
