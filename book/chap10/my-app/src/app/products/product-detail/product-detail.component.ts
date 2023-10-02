@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   @Output() bought = new EventEmitter();
   @Output() deleted = new EventEmitter();
   @Input() id = -1;
+  price: number | undefined;
   product$: Observable<Product> | undefined;
 
   constructor(

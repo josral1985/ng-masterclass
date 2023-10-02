@@ -2,8 +2,8 @@
   <h2>Product Details</h2>
   <h3>{{product.name}}</h3>
   <span>{{product.price | currency:'EUR'}}</span>
-  <form (ngSubmit)="changePrice(product, product.price)">
-    <input placeholder="New price" #price [(ngModel)]="product.price" />
+  <form (ngSubmit)="changePrice(product, price!)">
+    <input placeholder="New price" name="price" [(ngModel)]="price" />
     <button type="submit">Change</button>
   </form>
   <p>
