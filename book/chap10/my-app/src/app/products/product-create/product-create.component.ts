@@ -41,10 +41,10 @@ export class ProductCreateComponent {
   }
 
   get name() {
-    return this.productForm.controls.name;
+    return this.productForm!.controls.name;
   }
   get price() {
-    return this.productForm.controls.price;
+    return this.productForm!.controls.price;
   }
 
   createProduct() {
