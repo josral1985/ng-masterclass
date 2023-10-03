@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
 import {
@@ -14,7 +14,7 @@ import { priceRangeValidator } from '../price-range.directive';
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css'],
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnInit {
   // productForm = new FormGroup({
   //   name: new FormControl('', { nonNullable: true }),
   //   price: new FormControl<number | undefined>(undefined, {
@@ -50,12 +50,22 @@ export class ProductCreateComponent {
     }),
   });
 
+  showPriceRangeHint = false;
+
   @Output() added = new EventEmitter<Product>();
 
   constructor(
     private productsService: ProductsService,
-    private builder: FormBuilder
+    private builder: FormBuilder,
   ) {}
+
+  ngOnInit(): void {
+    this.price.valueChanges.subscribe(price => {
+        if (price) {
+          this.showPriceRangeHint = price > 1 && price < 10000;
+        }
+      });
+  }
 
   private buildForm() {
     this.productForm = this.builder.nonNullable.group({
@@ -80,6 +90,7 @@ export class ProductCreateComponent {
       .subscribe((product) => {
         this.productForm!.reset();
         this.added.emit(product);
+        this.showPriceRangeHint = false;
       });
   }
 }
