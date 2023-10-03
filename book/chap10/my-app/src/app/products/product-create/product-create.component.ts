@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-product-create',
@@ -16,12 +21,22 @@ export class ProductCreateComponent {
   //   }),
   // });
 
-  productForm:
-    | FormGroup<{
-        name: FormControl<string>;
-        price: FormControl<number | undefined>;
-      }>
-    | undefined;
+  // productForm: FormGroup<{
+  //       name: FormControl<string>;
+  //       price: FormControl<number | undefined>;
+  //     }>
+  //   | undefined;
+
+  productForm = new FormGroup({
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+    price: new FormControl<number | undefined>(undefined, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(1)]
+    }),
+  });
 
   @Output() added = new EventEmitter<Product>();
 
@@ -51,7 +66,7 @@ export class ProductCreateComponent {
     this.productsService
       .addProduct(this.name.value, Number(this.price.value))
       .subscribe((product) => {
-        this.productForm?.reset();
+        this.productForm!.reset();
         this.added.emit(product);
       });
   }
