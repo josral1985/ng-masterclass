@@ -1,14 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { priceRangeValidator } from '../price-range.directive';
 
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css'],
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnInit {
   // productForm = new FormGroup({
   //   name: new FormControl('', { nonNullable: true }),
   //   price: new FormControl<number | undefined>(undefined, {
@@ -16,19 +22,50 @@ export class ProductCreateComponent {
   //   }),
   // });
 
-  productForm:
-    | FormGroup<{
-        name: FormControl<string>;
-        price: FormControl<number | undefined>;
-      }>
-    | undefined;
+  // productForm: FormGroup<{
+  //       name: FormControl<string>;
+  //       price: FormControl<number | undefined>;
+  //     }>
+  //   | undefined;
+
+  // productForm = new FormGroup({
+  //   name: new FormControl('', {
+  //     nonNullable: true,
+  //     validators: Validators.required,
+  //   }),
+  //   price: new FormControl<number | undefined>(undefined, {
+  //     nonNullable: true,
+  //     validators: [Validators.required, Validators.min(1)]
+  //   }),
+  // });
+
+  productForm = new FormGroup({
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: Validators.required,
+    }),
+    price: new FormControl<number | undefined>(undefined, {
+      nonNullable: true,
+      validators: [Validators.required, priceRangeValidator()]
+    }),
+  });
+
+  showPriceRangeHint = false;
 
   @Output() added = new EventEmitter<Product>();
 
   constructor(
     private productsService: ProductsService,
-    private builder: FormBuilder
+    private builder: FormBuilder,
   ) {}
+
+  ngOnInit(): void {
+    this.price.valueChanges.subscribe(price => {
+        if (price) {
+          this.showPriceRangeHint = price > 1 && price < 10000;
+        }
+      });
+  }
 
   private buildForm() {
     this.productForm = this.builder.nonNullable.group({
@@ -51,8 +88,9 @@ export class ProductCreateComponent {
     this.productsService
       .addProduct(this.name.value, Number(this.price.value))
       .subscribe((product) => {
-        this.productForm?.reset();
+        this.productForm!.reset();
         this.added.emit(product);
+        this.showPriceRangeHint = false;
       });
   }
 }
