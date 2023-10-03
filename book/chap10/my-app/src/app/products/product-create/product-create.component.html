@@ -12,8 +12,8 @@
     <span *ngIf="price.touched && price.hasError('required')">
       The price is required.
     </span>
-    <span *ngIf="price.touched && price.hasError('min')">
-      The price should be greater than 1
+    <span *ngIf="price.touched && price.hasError('outOfRange')">
+      The price is out of range.
     </span>
   </div>
   <div>

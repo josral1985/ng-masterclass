@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { priceRangeValidator } from '../price-range.directive';
 
 @Component({
   selector: 'app-product-create',
@@ -27,6 +28,17 @@ export class ProductCreateComponent {
   //     }>
   //   | undefined;
 
+  // productForm = new FormGroup({
+  //   name: new FormControl('', {
+  //     nonNullable: true,
+  //     validators: Validators.required,
+  //   }),
+  //   price: new FormControl<number | undefined>(undefined, {
+  //     nonNullable: true,
+  //     validators: [Validators.required, Validators.min(1)]
+  //   }),
+  // });
+
   productForm = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
@@ -34,7 +46,7 @@ export class ProductCreateComponent {
     }),
     price: new FormControl<number | undefined>(undefined, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(1)]
+      validators: [Validators.required, priceRangeValidator()]
     }),
   });
 
