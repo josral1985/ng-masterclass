@@ -23,7 +23,6 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-
   //to be called whenever our route params change
   private initForm() {
     // our we in edit mode?
@@ -45,5 +44,9 @@ export class RecipeEditComponent implements OnInit {
       'imagePath': new FormControl(recipeImagePath),
       'description': new FormControl(recipeDescription)
     });
+  }
+
+  onSubmit() {
+    console.log(this.recipeForm);
   }
 }
