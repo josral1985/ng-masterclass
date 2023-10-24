@@ -3,13 +3,13 @@
   <!-- <li *ngFor="let product of products; let i=index" (click)="selectedProduct = product">
     {{i+1}}. {{ product }}
   </li> -->
-  <li *ngFor="let product of products; trackBy: trackByProducts" (click)="selectedProduct = product">
-    {{ product }}
+  <li *ngFor="let product of products" (click)="selectedProduct = product">
+    {{ product.name }}
   </li>
 </ul>
 <app-product-detail
   *ngIf="selectedProduct; else noProduct"
-  [name]="selectedProduct"
+  [product]="selectedProduct"
   (bought)="onBuy()"
 ></app-product-detail>
 <ng-template #noProduct>
