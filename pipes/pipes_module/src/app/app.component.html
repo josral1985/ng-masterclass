@@ -8,7 +8,8 @@
           </span>
           <strong>{{ server.name }}</strong> |
           {{ server.instanceType | uppercase }} |
-          {{ server.started | date:'fullDate' }}
+          <!-- order is important!  -->
+          {{ server.started | date:'fullDate' | uppercase }}
         </li>
       </ul>
     </div>
